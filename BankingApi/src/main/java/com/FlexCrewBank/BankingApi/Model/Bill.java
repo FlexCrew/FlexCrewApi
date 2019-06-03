@@ -2,8 +2,14 @@ package com.FlexCrewBank.BankingApi.Model;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin("*")
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Bill {
+    @Id
+    @GeneratedValue
     private Long id;
     private String status;
     private String payee;

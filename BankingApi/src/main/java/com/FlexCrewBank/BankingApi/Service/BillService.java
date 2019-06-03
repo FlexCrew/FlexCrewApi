@@ -4,11 +4,14 @@ import com.FlexCrewBank.BankingApi.Model.Bill;
 import com.FlexCrewBank.BankingApi.Repo.BillRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Optional;
 
+@CrossOrigin("*")
 @Service
 public class BillService {
+
     @Autowired
     BillRepo billRepo;
 
