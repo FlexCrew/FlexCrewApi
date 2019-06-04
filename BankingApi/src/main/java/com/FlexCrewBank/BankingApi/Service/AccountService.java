@@ -5,6 +5,8 @@ import com.FlexCrewBank.BankingApi.Model.Account;
 import com.FlexCrewBank.BankingApi.Repo.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -16,8 +18,8 @@ public class AccountService {
 
 
     //create an account method
-    public void createAccount(Long customer_id, Account account){
-        accountRepo.save(customer_id);
+    public void createAccount( Account account){
+        accountRepo.save(account);
     }
 
     //get all accounts method
@@ -31,8 +33,8 @@ public class AccountService {
     }
 
     //get all accounts by ID method
-    public Iterable<Account> getAllAccountsByID(Long customer_id, Account account){
-        return accountRepo.findAllById(customer_id);
+    public Iterable<Account> getAllAccountsByID(Iterable<Long> customer_id){
+         return accountRepo.findAllById(customer_id);
     }
 
     //delete a specific account method
@@ -41,8 +43,12 @@ public class AccountService {
     }
 
     //update an account method
-    public void updateAnAccount(Account account){
-        accountRepo.save(account);
+    public void updateAnAccount(Account account, Long id){
+        for (int i =0; i < accountRepo.count(); i++){
+            if (accountRepo.existsById(id)){
+                accountRepo.save(account);
+            }
+        }
     }
 
     //exists by ID method

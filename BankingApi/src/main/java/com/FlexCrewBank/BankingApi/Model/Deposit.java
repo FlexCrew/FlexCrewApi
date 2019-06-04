@@ -8,8 +8,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Deposit {
-    @GeneratedValue
+
     @Id
+    @GeneratedValue
     private Long id;
     private String type;
     private String transaction_date;

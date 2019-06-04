@@ -1,12 +1,18 @@
 package com.FlexCrewBank.BankingApi.Controller;
 
 import com.FlexCrewBank.BankingApi.Model.Account;
+import com.FlexCrewBank.BankingApi.Model.Customer;
+import com.FlexCrewBank.BankingApi.Model.Message;
 import com.FlexCrewBank.BankingApi.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -17,9 +23,20 @@ public class AccountController {
 
     //create an account method
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
-    public ResponseEntity<?> createAccountRecord(@RequestBody Long customer_id){
-        accountService.createAccount(customer_id);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    public Message createAccountRecord(@RequestBody Account account){
+        accountService.createAccount(account);
+        HttpHeaders headers = new HttpHeaders();
+        URI newAccountURI = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("{id}")
+                .buildAndExpand(account.getId())
+                .toUri();
+        headers.setLocation(newAccountURI);
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(accountService.getAnAccount(account.getId()));
+        Message message = new Message(200,"Success", arrayList);
+        return message;
+
     }
 
     //get all accounts method
@@ -30,20 +47,20 @@ public class AccountController {
 
     //get an account by Id method
     @RequestMapping(value = "/accounts/{accountsId}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<Account>> getAnAccountRecord(@PathVariable Long id){
-        return new ResponseEntity<>(accountService.getAnAccount(id), HttpStatus.OK);
+    public ResponseEntity<Optional<Account>> getAnAccountRecord(@PathVariable Long accountsId){
+        return new ResponseEntity<>(accountService.getAnAccount(accountsId), HttpStatus.OK);
     }
 
     //get all accounts by id method
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
-    public ResponseEntity<Account> getAllAccountsByIdRecord(@PathVariable Long customer_id){
-        return new ResponseEntity<>(accountService.getAllAccountsByID(customer_id), HttpStatus.OK);
+    public ResponseEntity<Iterable<Account>> getAllAccountsByIdRecord(@PathVariable Iterable<Long> customerId){
+        return new ResponseEntity<>(accountService.getAllAccountsByID(customerId), HttpStatus.OK);
     }
 
     //update an account method
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateAnAccountRecord(@RequestBody Account account){
-        accountService.updateAnAccount(account);
+    public ResponseEntity<?> updateAnAccountRecord(@RequestBody Account account, @PathVariable Long id){
+        accountService.updateAnAccount(account,id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

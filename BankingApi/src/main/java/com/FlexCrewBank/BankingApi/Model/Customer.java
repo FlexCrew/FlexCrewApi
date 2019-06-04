@@ -1,11 +1,7 @@
 package com.FlexCrewBank.BankingApi.Model;
 
-import org.apache.tomcat.jni.Address;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -14,8 +10,13 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "CUSTOMER_FIRST_NAME")
     private String first_name;
+    @Column(name = "CUSTOMER_LAST_NAME")
     private String last_name;
+
+    @JoinColumn(name = "CUSTOMER_ADDRESSES")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Address> address;
 
     public Customer() {
@@ -27,7 +28,6 @@ public class Customer {
         this.last_name = last_name;
         this.address = address;
     }
-
     public Long getId() {
         return id;
     }

@@ -6,8 +6,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Withdraw {
-    @GeneratedValue
     @Id
+    @GeneratedValue
     private Long id;
     // p2p, deposit , withdraw
     private String type;

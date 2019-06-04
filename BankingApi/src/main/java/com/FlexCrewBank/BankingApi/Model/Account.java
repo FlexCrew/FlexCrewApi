@@ -22,13 +22,24 @@ public class Account {
     @Column(name = "ACCOUNT_BALANCE")
     private Double balance;
 
-    @JoinColumn(name = "ACCOUNT_CUSTOMER")
-    @Embedded
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
     @Column(name = "ACCOUNT_TYPE")
     @Enumerated(EnumType.STRING)
     private Type type;
+
+    public Account() {
+    }
+
+    public Account(Long id, String nickname, Integer rewards, Double balance, Customer customer, Type type) {
+        this.id = id;
+        this.nickname = nickname;
+        this.rewards = rewards;
+        this.balance = balance;
+//        this.customer = customer;
+        this.type = type;
+    }
 
     public Long getId() {
         return id;
@@ -62,13 +73,13 @@ public class Account {
         this.balance = balance;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
 
     public Type getType() {
         return type;

@@ -17,12 +17,16 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public List<Customer> getAllCustomers(){
+    public Iterable<Customer> getAllCustomers(){
         return customerRepository.findAll();
     }
 
-    public void updateCustomer(Customer customer){
-        customerRepository.save(customer);
+    public void updateCustomer(Customer customer, Long id){
+        for (int i =0; i < customerRepository.count(); i++){
+            if (customerRepository.existsById(id)){
+                customerRepository.save(customer);
+            }
+        }
     }
 
     public void deleteCustomer(Long id){
