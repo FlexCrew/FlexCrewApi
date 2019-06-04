@@ -1,11 +1,13 @@
 package com.FlexCrewBank.BankingApi.Model;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
 public class Message {
 
-    private Integer code;
+    private HttpStatus code;
     private String message;
     private ArrayList<?> data;
 //    private Iterable data1;
@@ -14,13 +16,13 @@ public class Message {
     public Message() {
     }
 
-    public Message(Integer code, String message, ArrayList data) {
+    public Message(HttpStatus code, String message, ArrayList data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public Message(Integer code, String message) {
+    public Message(HttpStatus code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -53,11 +55,11 @@ public class Message {
 //        this.data2 = data2;
 //    }
 
-    public Integer getCode() {
+    public HttpStatus getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(HttpStatus code) {
         this.code = code;
     }
 
