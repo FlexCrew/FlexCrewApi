@@ -34,7 +34,7 @@ public class AccountController {
         headers.setLocation(newAccountURI);
         ArrayList arrayList = new ArrayList();
         arrayList.add(accountService.getAnAccount(account.getId()));
-        Message message = new Message(200,"Success", arrayList);
+        Message message = new Message(HttpStatus.CREATED,"Success", arrayList);
         return message;
 
     }

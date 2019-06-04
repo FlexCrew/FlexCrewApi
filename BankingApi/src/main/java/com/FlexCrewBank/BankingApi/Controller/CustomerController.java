@@ -31,10 +31,10 @@ public class CustomerController {
             customerService.createCustomer(customer);
             ArrayList arrayList = new ArrayList();
             arrayList.add(customerService.getCustomer(customer.getId()));
-            Message message = new Message(200, "Success", arrayList);
+            Message message = new Message(HttpStatus.CREATED, "Success", arrayList);
             return message;
         } catch( Exception e){
-            Message message = new Message(404, "Error");
+            Message message = new Message(HttpStatus.NOT_FOUND, "Error");
             return message;
         }
 
@@ -61,10 +61,10 @@ public class CustomerController {
 
             ArrayList<Iterable>  arrayList = new ArrayList();
               arrayList.add(customerService.getAllCustomers());
-            Message message = new Message(200,"Success", arrayList);
+            Message message = new Message(HttpStatus.OK,"Success", arrayList);
             return message;
         } catch (Exception e){
-            Message message = new Message(404, "Error Getting Accounts");
+            Message message = new Message(HttpStatus.NOT_FOUND, "Error Getting Accounts");
             return message;
         }
 
@@ -77,10 +77,10 @@ public class CustomerController {
             customerService.updateCustomer(customer, id);
             ArrayList arrayList = new ArrayList();
             arrayList.add(customerService.getCustomer(customer.getId()));
-            Message message = new Message(200, "Updated Customer account with id: " + id, arrayList);
+            Message message = new Message(HttpStatus.OK, "Updated Customer account with id: " + id, arrayList);
             return message;
         } catch(Exception e){
-            Message message = new Message(404, "Error Updating customer with id: " + id);
+            Message message = new Message(HttpStatus.NOT_FOUND, "Error Updating customer with id: " + id);
             return message;
         }
     }
@@ -94,10 +94,10 @@ public class CustomerController {
         try {
             ArrayList arrayList = new ArrayList();
             arrayList.add(customerService.getCustomer(id));
-            Message message = new Message(200,"Got account with id: " + id, arrayList );
+            Message message = new Message(HttpStatus.OK,"Got account with id: " + id, arrayList );
             return message;
         } catch(Exception e){
-            Message message = new Message(404, "Error updating account");
+            Message message = new Message(HttpStatus.NOT_FOUND, "Error updating account");
             return message;
         }
     }
