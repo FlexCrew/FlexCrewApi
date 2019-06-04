@@ -25,6 +25,18 @@ public class Bill {
 
     }
 
+    public Bill(Long id, String status, String payee, String nickname, String creationDate, String paymentDate, String recurringDate, String upcomingPaymentDate, String paymentAmount, String accountId) {
+        this.id = id;
+        this.status = status;
+        this.payee = payee;
+        this.nickname = nickname;
+        this.creationDate = creationDate;
+        this.paymentDate = paymentDate;
+        this.recurringDate = recurringDate;
+        this.upcomingPaymentDate = upcomingPaymentDate;
+        this.paymentAmount = paymentAmount;
+        this.accountId = accountId;
+    }
 
     public Long getId() {
         return id;

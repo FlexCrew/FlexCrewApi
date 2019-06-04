@@ -1,10 +1,10 @@
 package com.FlexCrewBank.BankingApi.Model;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-@Embeddable
+@Entity
 public class Address {
 
     @Id
@@ -12,18 +12,28 @@ public class Address {
     private Long id;
     private String street_number;
     private String street_name;
+    private String city;
     private String state;
     private String zip;
 
     public Address() {
     }
 
-    public Address(Long id, String street_number, String street_name, String state, String zip) {
-        this.id = id;
+    public Address( String street_number, String street_name, String city, String state, String zip) {
+//        this.id = id;
         this.street_number = street_number;
         this.street_name = street_name;
         this.state = state;
+        this.city = city;
         this.zip = zip;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Long getId() {
