@@ -8,11 +8,16 @@ import com.FlexCrewBank.BankingApi.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -22,6 +27,18 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+
+
+    @RequestMapping(value = "/customer", method = RequestMethod.POST)
+    public ResponseEntity<?> createCustomerAccount(@RequestBody Customer customer){
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newCustomerUri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("{id}")
+                .buildAndExpand(customer.getId())
+                .toUri();
+        responseHeaders.setLocation(newCustomerUri);
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
 
 //    public Message validate(Function function, Integer code1, Integer code2, ){}
 
@@ -52,6 +69,7 @@ public class CustomerController {
 //                .buildAndExpand(customer.getId())
 //                .toUri();
 //        headers.setLocation(newDepositURI);
+
 
     }
 
