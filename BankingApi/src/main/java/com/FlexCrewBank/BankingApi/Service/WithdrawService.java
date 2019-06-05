@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class WithdrawService {
@@ -24,8 +25,8 @@ public class WithdrawService {
         return withdrawRepo.existsById(id);
     }
 
-    public Withdraw findById(Long id){
-        return withdrawRepo.findById(id).orElse(null);
+    public Optional<Withdraw> findById(Long id){
+        return withdrawRepo.findById(id);
     }
     public void addWithdraw(Withdraw withdraw){
         withdrawRepo.save(withdraw);
