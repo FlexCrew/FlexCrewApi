@@ -36,28 +36,28 @@ public class BillController {
         }
 
         @RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.POST)
-        public Message createBillData(@RequestBody Bill bill){
-          try{
-              billService.createBill(bill);
-              ArrayList arrayList = new ArrayList();
-              Message message = new Message(HttpStatus.CREATED, "Suscess", arrayList);
+        public Message createBillData(@RequestBody Bill bill) {
+            try {
+                billService.createBill(bill);
+                ArrayList arrayList = new ArrayList();
+                Message message = new Message(HttpStatus.CREATED, "Suscess", arrayList);
+                return message;
 
 
-          }catch (Exception e){
-              Message message = new Message(HttpStatus.NOT_FOUND, "Error");
-              return  message;
-          }
+            } catch (Exception e) {
+                Message message = new Message(HttpStatus.NOT_FOUND, "Error");
+                return message;
+            }
 
-
-            HttpHeaders responseHeader = new HttpHeaders();
-            URI newBill= ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(bill.getId())
-                    .toUri();
-            responseHeader.setLocation(newBill);
-            return new Message(null,responseHeader,HttpStatus.CREATED);
         }
+//            HttpHeaders responseHeader = new HttpHeaders();
+//            URI newBill= ServletUriComponentsBuilder
+//                    .fromCurrentRequest()
+//                    .path("/{id}")
+//                    .buildAndExpand(bill.getId())
+//                    .toUri();
+//            responseHeader.setLocation(newBill);
+//            return new Message(null,responseHeader,HttpStatus.CREATED);
 
         @RequestMapping(value = "/bills/{billId}", method = RequestMethod.GET)
         public Message getBillData (@PathVariable Long billId){

@@ -14,7 +14,7 @@ public class Message {
 //    private Iterable data1;
 //    private Optional data2;
 
-    public Message(HttpStatus code, HttpHeaders responseHeader, HttpStatus created) {
+    public Message() {
     }
 
     public Message(HttpStatus code, String message, ArrayList data) {

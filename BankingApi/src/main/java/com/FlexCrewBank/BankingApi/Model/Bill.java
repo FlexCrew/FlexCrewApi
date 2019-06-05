@@ -16,16 +16,16 @@ public class Bill {
     private String nickname;
     private String creationDate;
     private String paymentDate;
-    private String recurringDate;
+    private Integer recurringDate;
     private String upcomingPaymentDate;
-    private String paymentAmount;
+    private Double paymentAmount;
     private String accountId;
 
     public Bill(){
 
     }
 
-    public Bill(Long id, String status, String payee, String nickname, String creationDate, String paymentDate, String recurringDate, String upcomingPaymentDate, String paymentAmount, String accountId) {
+    public Bill(Long id, String status, String payee, String nickname, String creationDate, String paymentDate, Integer recurringDate, String upcomingPaymentDate, Double paymentAmount, String accountId) {
         this.id = id;
         this.status = status;
         this.payee = payee;
@@ -86,11 +86,11 @@ public class Bill {
         this.paymentDate = paymentDate;
     }
 
-    public String getRecurringDate() {
+    public Integer getRecurringDate() {
         return recurringDate;
     }
 
-    public void setRecurringDate(String recurringDate) {
+    public void setRecurringDate(Integer recurringDate) {
         this.recurringDate = recurringDate;
     }
 
@@ -102,11 +102,11 @@ public class Bill {
         this.upcomingPaymentDate = upcomingPaymentDate;
     }
 
-    public String getPaymentAmount() {
+    public Double getPaymentAmount() {
         return paymentAmount;
     }
 
-    public void setPaymentAmount(String paymentAmount) {
+    public void setPaymentAmount(Double paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
 
@@ -127,9 +127,9 @@ public class Bill {
                 ", nickname='" + nickname + '\'' +
                 ", creationDate='" + creationDate + '\'' +
                 ", paymentDate='" + paymentDate + '\'' +
-                ", recurringDate='" + recurringDate + '\'' +
+                ", recurringDate=" + recurringDate +
                 ", upcomingPaymentDate='" + upcomingPaymentDate + '\'' +
-                ", paymentAmount='" + paymentAmount + '\'' +
+                ", paymentAmount=" + paymentAmount +
                 ", accountId='" + accountId + '\'' +
                 '}';
     }
