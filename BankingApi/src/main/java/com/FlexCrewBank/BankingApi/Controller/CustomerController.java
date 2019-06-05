@@ -3,8 +3,13 @@ package com.FlexCrewBank.BankingApi.Controller;
 import com.FlexCrewBank.BankingApi.Model.Customer;
 import com.FlexCrewBank.BankingApi.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +20,15 @@ public class CustomerController {
     CustomerService customerService;
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
-    public void createCustomerAccount(@RequestBody Customer customer){
-        customerService.createCustomer(customer);
+    public ResponseEntity<?> createCustomerAccount(@RequestBody Customer customer){
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newCustomerUri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("{id}")
+                .buildAndExpand(customer.getId())
+                .toUri();
+        responseHeaders.setLocation(newCustomerUri);
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/ customers", method = RequestMethod.GET)
