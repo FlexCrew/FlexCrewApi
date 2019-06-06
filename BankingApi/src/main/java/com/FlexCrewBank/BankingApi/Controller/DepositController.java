@@ -21,7 +21,7 @@ public class DepositController {
         depositService.getAllDeposits();
         return new ResponseEntity<>(depositService.depositRepo.findAll(), HttpStatus.OK);
     }
-    @RequestMapping(value = "withdrawals/{depositId}", method = RequestMethod.GET)
+    @RequestMapping(value = "deposits/{depositId}", method = RequestMethod.GET)
     public ResponseEntity<Deposit> getDepositById(@PathVariable Long id){
         Deposit w = depositService.findById(id);
         return new ResponseEntity<>(w, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class DepositController {
         headers.setLocation(newDepositURI);
         return new ResponseEntity<>(null, headers ,HttpStatus.CREATED);
     }
-    @RequestMapping(value = "deposit/{depositId}",method = RequestMethod.PUT)
+    @RequestMapping(value = "deposits/{depositId}",method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeposit(@PathVariable Long id, @RequestBody Deposit deposit){
         if (depositService.existsById(id)){
             depositService.addDeposit(deposit);

@@ -21,7 +21,7 @@ public class WithdrawController {
     public WithdrawService withdrawService;
 
 
-    @RequestMapping(value = "/accounts/{accountId}withdrawals", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/{accountId}/withdrawals", method = RequestMethod.GET)
     public Message getAllWithdrawals(){
         try {
             ArrayList arrayList = withdrawService.getAllWithdraws();
@@ -79,7 +79,7 @@ public class WithdrawController {
       }
     }
     @RequestMapping(value = "withdrawals/{withdrawallId}", method = RequestMethod.DELETE)
-    public Message deletePerson(@PathVariable Long id){
+    public Message deleteWithdraw(@PathVariable Long id){
         try{
             withdrawService.deleteWithdraw(id);
             Message message = new Message(HttpStatus.NO_CONTENT, "Deleted");
